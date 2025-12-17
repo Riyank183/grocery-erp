@@ -11,10 +11,14 @@ app.use(express.json());
 
 
 // Connect to MySQL
-import mysql from "mysql2";
+const db = mysql.createPool({
+  host: process.env.DB_HOST || 'localhost',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASS || '',
+  database: process.env.DB_NAME || 'mini_erp'
+});
 
-const db = mysql.createPool(process.env.DATABASE_URL);
-export default db;
+
 
 
 // Add a new sale and update inventory
