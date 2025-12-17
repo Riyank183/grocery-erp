@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mini ERP Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+
+    <header>
+
+<img src="grocery.png" alt="Grocery ERP Logo" class="logo">      
+      <nav>
+        <button onclick="showTab('products')" class="tab-btn">Products</button>
+        <button onclick="showTab('expenses')" class="tab-btn">Expenses</button>
+        <button onclick="showTab('sales')" class="tab-btn">Sales</button>
+        <button class="tab-btn" onclick="showTab('dashboard')">Dashboard</button>
+
+
+      </nav>
+    </header>
+
+<div id="dashboard" class="tab" style="display:none;">
+
+  <h2>Dashboard Overview</h2>
+
+  <!-- KPIs -->
+  <div id="kpiCards" class="dashboard-kpis"></div>
+
+  <!-- Top Selling Products -->
+  <h3 style="margin-top:25px;">Top Selling Products</h3>
+  <canvas id="topProductsChart" height="120"></canvas>
+
+  <!-- Monthly Sales Chart -->
+  <h3 style="margin-top:25px;">Monthly Sales Chart</h3>
+  <canvas id="salesChart" height="120"></canvas>
+
+  <!-- Low Stock Chart -->
+  <h3 style="margin-top:25px;">Low Stock Items</h3>
+  <canvas id="lowStockChart" height="120"></canvas>
+
+</div>
+
+
+
+    <!-- PRODUCTS TAB -->
+    <div id="products" class="tab">
+      <div class="card">
+        <h2>Add Product</h2>
+        <form id="productForm">
+          <input type="hidden" id="productId">
+          <input type="text" id="productName" placeholder="Product Name" required>
+          <input type="number" id="productPrice" placeholder="Price" step="0.01" required>
+          <input type="number" id="productQuantity" placeholder="Quantity" required>
+          <button type="submit">Add / Update Product</button>
+        </form>
+      </div>
+
+<br>
+
+      <div class="card">
+        <h2>Products</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Qty</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- EXPENSES TAB -->
+    <div id="expenses" class="tab" style="display:none;">
+  <div class="card">
+    <h2>Add Expense</h2>
+    <form id="expenseForm">
+      <input type="text" id="expenseCategory" placeholder="Category (Rent, Salary)" required>
+      <input type="number" id="expenseAmount" placeholder="Amount" required>
+      <input type="text" id="expenseNote" placeholder="Note (optional)">
+      <button type="submit">Add Expense</button>
+    </form>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h2>Expenses</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Category</th>
+          <th>Amount</th>
+          <th>Note</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody id="expensesTableBody"></tbody>
+    </table>
+  </div>
+</div>
+
+
+    <!-- SALES TAB -->
+    <section id="sales" class="tab" style="display:none;">
+  <div class="card">
+    <h2>Record Sale</h2>
+    <form id="saleForm">
+      <select id="saleProduct" required>
+        <option value="">-- select product --</option>
+      </select>
+      <input id="saleQty" type="number" placeholder="Quantity" required min="1">
+      <input id="saleTax" type="number" placeholder="Tax % (optional)" step="0.01">
+      <button type="submit">Record Sale</button>
+    </form>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h2>Sales</h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>Product</th><th>Qty</th><th>Unit</th><th>Subtotal</th><th>Tax</th><th>Total</th><th>Date</th></tr>
+      </thead>
+      <tbody id="salesTableBody"></tbody>
+    </table>
+  </div>
+</section>
+
+    <footer>Grocery ERP • Beta Version</footer>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="app.js"></script>
+</body>
+</html>
